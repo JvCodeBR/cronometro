@@ -4,15 +4,13 @@ let seconds;
 let cron;
 let miliseconds;
 
-alarm = new Audio('./alarm.mp3')
+const alarm = new Audio('./alarm.mp3')
 
 document.addEventListener('keypress', (event) => {
-
-    if (event.key === 'i') {
+    if (event.key === 'i' || event.key === 'I') {
         check()
     }
-
-    if (event.key === 'p') {
+    if (event.key === 'p' || event.key === 'P') {
             pause()
         }
 })
@@ -30,7 +28,7 @@ function check() {
 
 function start() {
     miliseconds = convertToMls();
-    cron = setInterval(() => {timer()}, 1000)
+    cron = setInterval(() => {timer()}, 1000);
     document.querySelector('.toggle').innerHTML = 'Pausar';
 }
 
@@ -41,9 +39,9 @@ function pause() {
 
 function stop() {
     clearInterval(cron);
-    document.querySelector('.second').value = ''
-    document.querySelector('.minute').value = ''
-    document.querySelector('.hour').value = ''
+    document.querySelector('.second').value = '';
+    document.querySelector('.minute').value = '';
+    document.querySelector('.hour').value = '';
     document.querySelector('.toggle').innerHTML = 'Iniciar';
 }
 
@@ -52,16 +50,13 @@ function timer() {
         miliseconds -= 1000
     } 
 
-    hours = parseInt(miliseconds / 3600000)
-    minutes = parseInt((miliseconds - 3600000*hours) / 60000)
-    seconds = parseInt((miliseconds - (60000*minutes + 3600000*hours)) / 1000)
+    hours = parseInt(miliseconds / 3600000);
+    minutes = parseInt((miliseconds - 3600000*hours) / 60000);
+    seconds = parseInt((miliseconds - (60000*minutes + 3600000*hours)) / 1000);
 
-
-
-    document.querySelector('.hour').value = `${hours > 9 ? hours : '0'+hours}`
-    document.querySelector('.minute').value = `${minutes > 9 ? minutes : '0'+minutes}`
-    document.querySelector('.second').value = `${seconds > 9 ? seconds : '0'+seconds}`
-
+    document.querySelector('.hour').value = `${hours > 9 ? hours : '0'+hours}`;
+    document.querySelector('.minute').value = `${minutes > 9 ? minutes : '0'+minutes}`;
+    document.querySelector('.second').value = `${seconds > 9 ? seconds : '0'+seconds}`;
 
     if (miliseconds == 0) {
         stop();
@@ -70,10 +65,7 @@ function timer() {
         alarm.pause();
         alarm.currentTime = 0;
         document.querySelector('.toggle').innerHTML = 'Iniciar';
-
     }
-
-
 }
 
 function convertToMls(){
@@ -84,5 +76,4 @@ function convertToMls(){
     let mls = smls + mmls + hmls;
 
     return mls
-
 }
