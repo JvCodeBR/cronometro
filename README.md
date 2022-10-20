@@ -1,1 +1,1 @@
-# Teste Esferas Software
+Cronometro feito em JavaScript
